@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 import { Button } from './ui/button';
-import { Heart, MessageSquare, Image } from 'lucide-react';
+import { Heart, MessageSquare, Share } from 'lucide-react';
 
 export type PostType = {
   id: string;
@@ -49,77 +49,87 @@ const Post = ({ post }: PostProps) => {
   };
 
   return (
-    <div className="border border-social-border rounded-md bg-white mb-4 overflow-hidden">
+    <div className="border border-social-border rounded shadow bg-white mb-4 overflow-hidden">
       {/* Post Header */}
       <div className="flex items-center p-4">
-        <Avatar className="h-8 w-8 mr-3">
+        <Avatar className="h-10 w-10 mr-3">
           <AvatarImage src={post.user.avatar} alt={post.user.username} />
           <AvatarFallback>{post.user.username[0].toUpperCase()}</AvatarFallback>
         </Avatar>
-        <span className="font-medium">{post.user.username}</span>
+        <div>
+          <div className="font-medium text-social-secondary">{post.user.username}</div>
+          <div className="text-xs text-gray-500">{post.createdAt}</div>
+        </div>
+      </div>
+
+      {/* Post Caption */}
+      <div className="px-4 pb-3">
+        <p>{post.content.caption}</p>
       </div>
 
       {/* Post Image */}
-      <div className="relative aspect-square">
-        <img
-          src={post.content.image}
-          alt="Post content"
-          className="w-full h-full object-cover"
-        />
-      </div>
+      {post.content.image && (
+        <div className="relative">
+          <img
+            src={post.content.image}
+            alt="Post content"
+            className="w-full object-cover"
+          />
+        </div>
+      )}
 
       {/* Post Actions */}
       <div className="p-4">
-        <div className="flex gap-4">
+        <div className="flex items-center gap-1 border-b border-social-border pb-3">
           <Button 
             variant="ghost" 
-            size="icon" 
+            size="sm" 
             onClick={toggleLike} 
-            className={isLiked ? "text-red-500" : ""}
+            className={isLiked ? "text-social-primary" : "text-gray-600"}
           >
             <Heart 
-              className={`h-6 w-6 ${isLiked ? "fill-red-500" : ""} ${isLiked ? "animate-heart-beat" : ""}`} 
+              className={`h-5 w-5 mr-2 ${isLiked ? "fill-social-primary" : ""}`} 
             />
+            {likeCount}
           </Button>
           <Button 
             variant="ghost" 
-            size="icon" 
+            size="sm" 
             onClick={() => setShowComments(!showComments)}
+            className="text-gray-600"
           >
-            <MessageSquare className="h-6 w-6" />
+            <MessageSquare className="h-5 w-5 mr-2" />
+            {post.stats.comments}
           </Button>
-        </div>
-
-        {/* Post Stats */}
-        <div className="mt-2">
-          <p className="font-medium">{likeCount} likes</p>
-        </div>
-
-        {/* Post Caption */}
-        <div className="mt-1">
-          <span className="font-medium">{post.user.username}</span>{" "}
-          <span>{post.content.caption}</span>
-        </div>
-
-        {/* Post Time */}
-        <div className="mt-1">
-          <span className="text-sm text-gray-500">{post.createdAt}</span>
+          <Button 
+            variant="ghost" 
+            size="sm"
+            className="text-gray-600"
+          >
+            <Share className="h-5 w-5 mr-2" />
+          </Button>
         </div>
 
         {/* Comments Section */}
         {showComments && (
-          <div className="mt-4">
-            <p className="text-sm text-gray-500 mb-2">View all {post.stats.comments} comments</p>
-            <form onSubmit={handleCommentSubmit} className="flex gap-2">
+          <div className="mt-3">
+            <p className="text-sm text-social-secondary mb-2">Комментарии ({post.stats.comments})</p>
+            <form onSubmit={handleCommentSubmit} className="flex mt-2 border border-social-border rounded-full overflow-hidden">
               <input
                 type="text"
-                placeholder="Add a comment..."
-                className="flex-1 bg-transparent border-none outline-none text-sm"
+                placeholder="Напишите комментарий..."
+                className="flex-1 px-4 py-2 text-sm border-none outline-none"
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
               />
-              <Button type="submit" variant="ghost" size="sm" disabled={!comment.trim()}>
-                Post
+              <Button 
+                type="submit" 
+                variant="ghost" 
+                size="sm" 
+                disabled={!comment.trim()}
+                className="text-social-primary"
+              >
+                Отправить
               </Button>
             </form>
           </div>

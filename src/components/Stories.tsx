@@ -12,7 +12,7 @@ type Story = {
 const mockStories: Story[] = [
   {
     id: '1',
-    username: 'your_story',
+    username: 'Моя история',
     avatar: 'https://images.unsplash.com/photo-1649972904349-6e44c42644a7',
     hasUnseenStory: false,
   },
@@ -62,28 +62,28 @@ const mockStories: Story[] = [
 
 const StoryItem = ({ story }: { story: Story }) => {
   const borderClass = story.hasUnseenStory
-    ? 'bg-gradient-to-tr from-social-primary to-social-secondary p-[2px] rounded-full'
+    ? 'bg-social-primary p-[2px] rounded-full'
     : 'p-[2px]';
 
   return (
     <div className="flex flex-col items-center space-y-1">
       <div className={borderClass}>
         <div className="bg-white p-[2px] rounded-full">
-          <Avatar className="h-16 w-16">
+          <Avatar className="h-14 w-14">
             <AvatarImage src={story.avatar} alt={story.username} />
             <AvatarFallback>{story.username[0].toUpperCase()}</AvatarFallback>
           </Avatar>
         </div>
       </div>
-      <span className="text-xs truncate max-w-[70px]">{story.username}</span>
+      <span className="text-xs truncate max-w-[65px]">{story.username}</span>
     </div>
   );
 };
 
 const Stories = () => {
   return (
-    <div className="bg-white py-4">
-      <div className="flex space-x-4 px-4 overflow-x-auto scrollbar-hide pb-2">
+    <div className="bg-white rounded shadow mb-4">
+      <div className="flex space-x-4 px-4 py-3 overflow-x-auto scrollbar-hide">
         {mockStories.map((story) => (
           <StoryItem key={story.id} story={story} />
         ))}
