@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Flower, TreePine, Rose } from 'lucide-react';
+import { Flower, TreePine, Heart } from 'lucide-react';
 
 const GardenHeader = () => {
   const location = useLocation();
@@ -46,7 +46,7 @@ const GardenHeader = () => {
                 variant={location.pathname === '/roses' ? "secondary" : "ghost"} 
                 className="text-white hover:bg-garden-secondary/70"
               >
-                <Rose className="mr-2 h-4 w-4" />
+                <Heart className="mr-2 h-4 w-4" />
                 Roses
               </Button>
             </Link>

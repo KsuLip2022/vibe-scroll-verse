@@ -3,7 +3,7 @@ import React from 'react';
 import GardenHeader from '@/components/GardenHeader';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Flower, TreePine, Rose } from 'lucide-react';
+import { Flower, TreePine, Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Home = () => {
@@ -38,7 +38,7 @@ const Home = () => {
             </Link>
             <Link to="/roses">
               <Button size="lg" className="bg-garden-rose text-white hover:bg-garden-rose/90">
-                <Rose className="mr-2 h-5 w-5" />
+                <Heart className="mr-2 h-5 w-5" />
                 Explore Roses
               </Button>
             </Link>
@@ -110,7 +110,7 @@ const Home = () => {
               </p>
               <Link to="/roses">
                 <Button className="bg-garden-rose hover:bg-garden-rose/90">
-                  <Rose className="mr-2 h-4 w-4" />
+                  <Heart className="mr-2 h-4 w-4" />
                   View Roses
                 </Button>
               </Link>
