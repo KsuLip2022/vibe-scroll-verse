@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -69,6 +70,15 @@ export default {
 					dark: '#1A1F2C',
 					background: '#EDEEF0', // VK background gray
 					border: '#DFE2E8'      // VK borders
+				},
+				garden: {
+					primary: '#4A7C59',    // Dark green
+					secondary: '#8CC084',   // Light green
+					accent: '#D68C45',      // Orange accent
+					light: '#F2FCE2',       // Light background
+					rose: '#E55867',        // Rose red
+					yellow: '#FFC857',      // Sunny yellow
+					brown: '#8E6E53'        // Earth brown
 				}
 			},
 			borderRadius: {
